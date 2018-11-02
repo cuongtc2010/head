@@ -15,22 +15,8 @@ class LoginForm extends StatefulWidget {
 
 class LoginFormState extends State<LoginForm>
     with TickerProviderStateMixin{
-  AnimationController _loginButtonController;
   var animationStatus = 0;
   final _formKey = GlobalKey<FormState>();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    _loginButtonController = new AnimationController(
-        duration: new Duration(milliseconds: 300), vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _loginButtonController.dispose();
-    super.dispose();
-  }
 
   final Map<String, dynamic> _formData = {
     'email': null,
@@ -45,8 +31,7 @@ class LoginFormState extends State<LoginForm>
       //var result = user.checkLogin(new User(username: _username, password: _password));
       Map<String, dynamic> authResult = await model.checkLogin(_formData["username"], _formData["password"]);
       if(authResult["success"]){
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainPage()));
+
       }else{
         ErrorDialog.show(context, "Sai tài khoản hoặc mật khẩu");
       }
@@ -151,7 +136,6 @@ class LoginFormState extends State<LoginForm>
 
     Widget _buildLoginForm(AppModel model){
       return Scaffold(
-          key: _scaffoldKey,
           body: new Stack(
             alignment: Alignment(0.0, 0.0),
             fit: StackFit.expand,

@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'screens/Login/login.dart';
 import 'screens/MainPage/main_page.dart';
-import 'routes.dart';
+import 'screens/LichSuMuaXe/chi_tiet_lich_su.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:head_phan_mem_panda/scoped_models/app_model.dart';
 
@@ -13,7 +11,6 @@ class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _MyAppState();
   }
 }
@@ -35,7 +32,6 @@ class _MyAppState extends State<MyApp>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return ScopedModel<AppModel>(
       model: _model,
       child: new MaterialApp(
@@ -46,6 +42,7 @@ class _MyAppState extends State<MyApp>{
           '/': (BuildContext context)=>_isAuthenticated ? MainPage() : new LoginForm(),
           '/login': (BuildContext context)=>_isAuthenticated ? MainPage() : new LoginForm(),
           '/main-page': (BuildContext context)=>_isAuthenticated ? new MainPage() : new LoginForm(),
+          '/chi-tiet-lich-su': (BuildContext context)=>_isAuthenticated ? new ChiTietLichSuScreen() : new LoginForm(),
         },
         onUnknownRoute: (RouteSettings settings) {
           return MaterialPageRoute(

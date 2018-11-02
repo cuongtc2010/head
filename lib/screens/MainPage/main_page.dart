@@ -8,6 +8,7 @@ import '../../models/user/user.dart';
 import 'package:flutter/services.dart';
 import 'package:head_phan_mem_panda/scoped_models/app_model.dart';
 import 'package:scoped_model/scoped_model.dart';
+import '../LichSu/lich_su.dart';
 
 
 class MainPage extends StatefulWidget {
@@ -23,7 +24,7 @@ class MainPageState extends State<MainPage>
   TabController _tabController;
   ScrollController _scrollViewController;
   var title = '';
-
+  final AppModel model = AppModel();
   Widget _buildDrawer(context, AppModel model) {
     return new Drawer(
       child: new ListView(
@@ -65,9 +66,13 @@ class MainPageState extends State<MainPage>
           new ListTile(
             leading: new Icon(Icons.home),
             title: new Text("Trang chủ"),
-            onTap: () {
-              print(model.user.token);
-
+            onTap: () async {
+              try{
+                print(model.user.token);
+              }catch(e){
+                print(e.toString());
+              }
+              await new Home();
               Navigator.pop(context);
             },
           ),
@@ -136,7 +141,7 @@ class MainPageState extends State<MainPage>
   void initState() {
     super.initState();
     _scrollViewController = new ScrollController();
-    _tabController = new TabController(vsync: this, length: 4);
+    _tabController = new TabController(vsync: this, length: 3);
   }
 
   @override
@@ -165,9 +170,10 @@ class MainPageState extends State<MainPage>
                       tabs: [
                         new Tab(icon: new Icon(Icons.home), text: "Home"),
                         new Tab(icon: new Icon(Icons.bookmark), text: "Mua xe"),
-                        new Tab(icon: new Icon(Icons.gif), text: "Khuyến mãi"),
-                        new Tab(icon: new Icon(Icons.list), text: "Thông tin")
+                        //new Tab(icon: new Icon(Icons.gif), text: "Khuyến mãi"),
+                        //new Tab(icon: new Icon(Icons.list), text: "Thông tin")
                         //new Tab(icon: new Icon(Icons.list), text: "Nhân viên")
+
                       ],
                       controller: _tabController,
                     ),
@@ -177,9 +183,9 @@ class MainPageState extends State<MainPage>
               body: new TabBarView(
                 children: [
                   new Home(),
-                  new LichSuMuaXe(),
-                  new KhuyenMai(),
-                  new ThongTin()
+                  new LichSuMuaXeScreen(model),
+                  //new KhuyenMai(),
+                  //new ThongTin()
                   //new UserScreen()
                 ],
                 controller: _tabController,
