@@ -32,7 +32,7 @@ class ChiTietlichSuState extends State<ChiTietLichSuScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-
+				Text(model.lichsumuaxes[0].id)
           ],
         ),
       );

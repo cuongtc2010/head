@@ -208,20 +208,10 @@ class LichSuMuaXeModel extends CoreModel {
       }
 
       try {
-         LichSuMuaXe lichsu = LichSuMuaXe(
-             id: getReponseLichSuChiTiet["data"][0]["id"],
-             id_dong_bo_phan_mem: getReponseLichSuChiTiet["data"][0]["id_dong_bo_phan_mem"],
-             ngay: getReponseLichSuChiTiet["data"][0]["ngay"],
-             tu_ngay: getReponseLichSuChiTiet["data"][0]["tu_ngay"],
-             den_ngay: getReponseLichSuChiTiet["data"][0]["den_ngay"],
-             phan_loai_noi_dung: getReponseLichSuChiTiet["data"][0]["phan_loai_noi_dung"],
-             id_khach_hang: getReponseLichSuChiTiet["data"][0]["id_khach_hang"],
-             ghi_chu: getReponseLichSuChiTiet["data"][0]["ghi_chu"],
-             noi_dung_tong_quat: getReponseLichSuChiTiet["data"][0]["noi_dung_tong_quat"],
-             noi_dung_chi_tiet: getReponseLichSuChiTiet["data"][0]["noi_dung_chi_tiet"],
-         );
-
-         print(lichsu.toString());
+        final lichsus = getReponseLichSuChiTiet["data"].cast<Map<String, dynamic>>();
+        _lichsumuaxes = await lichsus.map<LichSuMuaXe>((json) {
+          return LichSuMuaXe.fromJson(json);
+        }).toList();
       } catch (e) {
         print("GG: " + e.toString());
       }
