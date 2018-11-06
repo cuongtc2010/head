@@ -6,6 +6,7 @@ import '../../models/lichsumuaxe/lich_su_mua_xe.dart';
 
 class ChiTietLichSuScreen extends StatefulWidget {
   final String lichsuId;
+
   ChiTietLichSuScreen({this.lichsuId}) : super();
 
   @override
@@ -30,13 +31,29 @@ class ChiTietlichSuState extends State<ChiTietLichSuScreen> {
         padding: EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-				Text(model.lichsumuaxes[0].id)
+            Row(
+              children: <Widget>[
+                Text("Lịch sử Id: "),
+                Text(model.lichsumuaxes[0].id),
+              ],
+            ),
+            Divider(
+              height: 2.0,
+              color: Colors.grey,
+            ),
+            HtmlView(
+              data: model.lichsumuaxes[0].noi_dung_tong_quat,
+            ),
+            Divider(
+              height: 2.0,
+              color: Colors.grey,
+            )
           ],
         ),
       );
     }
+
     return ScopedModel<AppModel>(
       model: _model,
       child: Scaffold(

@@ -13,7 +13,7 @@ class CoreModel extends Model {
   bool _isLoading = false;
   User _user;
   List<LichSuMuaXe> _lichsumuaxes = [];
-  List<LichSuMuaXe> _lichsuChiTiet;
+  List<LichSuMuaXe> _lichsuChiTiet = [];
 }
 
 class UserModel extends CoreModel {
@@ -42,6 +42,7 @@ class UserModel extends CoreModel {
           headers: {'Content-Type': 'application/json'});
       final Map<String, dynamic> mapResponse = json.decode(response.body);
       if (mapResponse["status"] == 201) {
+        print(mapResponse);
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString("token", mapResponse["data"]["token"]);
         await prefs.setString(
@@ -198,7 +199,7 @@ class LichSuMuaXeModel extends CoreModel {
       }
 
       final Map<String, dynamic> getReponseLichSuChiTiet =
-          json.decode(response.body);
+          await json.decode(response.body);
 
       if (getReponseLichSuChiTiet == null) {
         _isLoading = false;
